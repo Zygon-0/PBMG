@@ -1,3 +1,6 @@
+# rethought the way it worked and massively simplified it
+
+
 def choose_direction_output(current_room, chosen_direction, rooms_list):
 
     if chosen_direction == "back":
@@ -10,10 +13,8 @@ def choose_direction_output(current_room, chosen_direction, rooms_list):
         check_number = 3
 
     if rooms_list[current_room - 1][check_number] == -1:
-        print("output: -1")
         print(current_room)
         return -1
 
     else:
-        print("output: rooms_list[current_room - 1][check_number]")
         return rooms_list[current_room - 1][check_number]

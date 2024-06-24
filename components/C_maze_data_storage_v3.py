@@ -1,4 +1,4 @@
-# added dead ends and exit
+# dead ends were going back to the wrong room
 
 
 
@@ -59,7 +59,7 @@ while len(rooms_list) != rooms_num:
     room_print_setup = (random.randint(1, 15))
     if rooms_list:
         for i in range(0, len(rooms_list)):
-            if int(room_here_setup) in rooms_list[i][:3]:
+            if int(room_here_setup) in rooms_list[i][2:4]:
                 grab_back_vel = rooms_list[i]
                 room_back_setup = grab_back_vel[0]
 
