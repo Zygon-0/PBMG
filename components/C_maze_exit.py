@@ -147,7 +147,7 @@ while True:
     # print current room
     print(room_to_print)
     # current room number * test
-    print(f"current room = {current_room}")
+    print(f"current room visual = {rooms_list[current_room - 1][4]}")
 
     if rooms_list[current_room - 1][4] == 16:
         break

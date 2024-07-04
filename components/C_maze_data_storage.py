@@ -42,7 +42,7 @@ print("")
 # variable setup
 cur_num_rooms = 1
 room_back_setup = 0
-rooms_num = 20
+rooms_num = 5
 
 
 # make rooms list

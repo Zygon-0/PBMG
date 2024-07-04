@@ -28,22 +28,23 @@ from picture_maze_game.functions.F_chosen_direction_v2 import choose_direction_o
 
 # Variable setup
 rooms_list = []
+when_visited_num = 1
 keep_playing = True
 
 
 # Starting text
 statement_generator("Picture Based Maze Game", "*8", 3)
-print("")
-print("")
+print()
+print()
 
 
 # Small bit of lore
 statement_generator("Story Setup", "#", 1)
-print("")
+print()
 print("you have joined the crew at\nworld leading maze making\ncompany. and as punishment\nfor making a mistake you"
       "\nhave been tasked with\ntesting the mazes the\ncompany makes ")
-print("")
-print("")
+print()
+print()
 
 
 # Setup questions
@@ -149,24 +150,18 @@ while keep_playing:
     # | Pandas Setup |
 
     # dict lists
-    dict_rooms_num = []
-    when_visited = []
-    times_visited = []
-    all_rooms_points = []
+    dict_rooms_num_list = []
+    when_visited_list = []
+    times_visited_list = []
+    rooms_points_list = []
 
     # end dict
     end_results_dict = {
-        "Room Visited": dict_rooms_num,
-        "When": when_visited,
-        "Times": times_visited,
-        "Points": all_rooms_points
+        "Room Visited": dict_rooms_num_list,
+        "When": when_visited_list,
+        "Times": times_visited_list,
+        "Points": rooms_points_list
     }
-
-    # make data frame
-    end_results_frame = pandas.DataFrame(end_results_dict)
-
-    # calculate total point
-    point_total = sum(all_rooms_points)
 
 
 
@@ -215,6 +210,13 @@ while keep_playing:
         rooms_list_list = [room_here_setup, room_back_setup, room_left_setup, room_right_setup, room_print_setup]
         rooms_list.append(rooms_list_list)
 
+        # .append dict lists
+        dict_rooms_num_list.append(room_here_setup)
+        times_visited_list.append(0)
+        when_visited_list.append(0)
+        rooms_points_list.append(0)
+
+
     exit_room_subtract = len(rooms_list)
     # Add Dead ends
     while len(rooms_list) != cur_num_rooms:
@@ -228,6 +230,13 @@ while keep_playing:
         room_right_setup = -1
         rooms_list_list = [room_here_setup, room_back_setup, room_left_setup, room_right_setup, room_print_setup]
         rooms_list.append(rooms_list_list)
+
+        # .append dict lists
+        dict_rooms_num_list.append(room_here_setup)
+        times_visited_list.append(0)
+        when_visited_list.append(0)
+        rooms_points_list.append(0)
+
 
     # Add exit room randomly
 
@@ -262,11 +271,23 @@ while keep_playing:
         # Set next room to print
         room_to_print = room_select(rooms_list[current_room - 1][4], view_chosen)
 
+
+        # dict stuff
+        # update current rooms times_visited
+        times_visited_list[current_room - 1] += 1
+
+        # if first time in room set rooms when_visited
+        if times_visited_list[current_room - 1] == 1:
+            when_visited_list[current_room - 1] = num_st_nd_rd_th(when_visited_num)
+            when_visited_num += 1
+
+
         # print current room
         print(room_to_print)
         # current room number * test
         print(f"current room = {current_room}")
 
+        # win if in exit room
         if rooms_list[current_room - 1][4] == 16:
             break
 
@@ -297,14 +318,46 @@ while keep_playing:
 
 
     # | give player results |
+
+    # set 0 in when_visited to Never
+    for i in range(len(when_visited_list)):
+        if when_visited_list[i] == 0:
+            when_visited_list[i] = "Never"
+
+    # get each rooms points
+    for i in range(len(when_visited_list)):
+
+        if times_visited_list[i] != 0:
+            rooms_points_list[i] = -10
+
+        if i == rooms_list[current_room - 1][0] - 1:
+            rooms_points_list[i] = 10 * len(rooms_list)
+
+    # make data frame
+    end_results_frame = pandas.DataFrame(end_results_dict)
+
+    # print results
+    time.sleep(2)
+    print()
     print("Congratulations You Escaped The Maze!!!")
     print()
     print()
     print("----- End Results -----")
     print()
-    print("")
+    print("Getting through the maze without visiting all the rooms is down to luck!")
+    print("If you got a score of more than 10, you are officially lucky.")
     print()
-    time.sleep(2)
+    print("Here is your route and your final points...")
+    print()
+    print(end_results_frame)
+    print()
+    print(f"You went to {when_visited_num - 1} of the {len(rooms_list)} rooms and visited those rooms a total of {sum(times_visited_list)} times")
+    print()
+    print(f"==== Total Points: {sum(rooms_points_list)} ====")
+    print()
+    print()
+    print()
+    time.sleep(5)
 
     continue_game = choice_checker("Would you like another maze?: ", ["yes", "no"], "please enter yes or no")
     print("")
@@ -313,6 +366,6 @@ while keep_playing:
 
 
 print("thanks for playing")
-print("")
-time.sleep(3)
+print()
+time.sleep(2)
 
