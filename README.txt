@@ -1,4 +1,4 @@
-B = bace / main program
+B = bace / main program /n
 c = component
 F = function
   = other / miscellaneous
