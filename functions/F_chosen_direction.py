@@ -38,8 +38,3 @@ def choose_direction_output(current_room, chosen_direction, rooms_list):
 
     else:
         return rooms_list[current_room - 1][check_number]
-
-
-
-
-    list = [12, 14, 7, 7, 9, 6, 12, 4, 6, 8, 9, 2, 5, 1, 11, 2, 6, 8, 12, 8]

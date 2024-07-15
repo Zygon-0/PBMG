@@ -1,5 +1,9 @@
+# added v2nd view mode
+
+
 def room_select(num, view_chosen):
 
+    # if view_chosen is <above> get room to print from this list
     if view_chosen == "above":
         select_room_list_above = [
             "-----------------------------------------------------------------------------------------------------\n"
@@ -447,8 +451,10 @@ def room_select(num, view_chosen):
             "-----------------------------------------------------------------------------------------------------\n"
             ]
 
+        # return that room from list
         return select_room_list_above[num]
 
+    # if view_chosen is <in> get room to print from this list
     if view_chosen == "in":
         select_room_list_in = [
             "┌---------------------------------------------------------------------------------------------------┐\n"
@@ -1082,4 +1088,5 @@ def room_select(num, view_chosen):
             "└---------------------------------------------------------------------------------------------------┘\n",
             ]
 
+        # return that room from list
         return select_room_list_in[num]

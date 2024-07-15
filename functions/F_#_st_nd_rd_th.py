@@ -1,7 +1,9 @@
 def num_st_nd_rd_th(num):
 
+    # gets last digit
     last_digit = int(repr(num)[-1])
 
+    # applies correct place letters
     if last_digit == 1:
         return f"{num}st"
 
@@ -13,12 +15,3 @@ def num_st_nd_rd_th(num):
 
     else:
         return f"{num}th"
-
-from _Functions.F_int_checker import int_check
-
-while True:
-    numb = int_check("num: ", 1)
-
-    output = num_st_nd_rd_th(numb)
-
-    print(output)
