@@ -1,0 +1,18 @@
+
+Getting through the maze without visiting all the rooms is down to luck!
+If you got a score of more than 10, you are officially lucky.
+
+Here is your route and your final points...
+
+room visited    when    times   points
+
+  1              1st        2      -10
+  2              2nd        2      -10
+  3              4th        1       50
+  4              3rd        1      -10
+  5            never        0        0
+
+  You went to 4 of the 5 rooms and visited those rooms a total of 6 times
+
+  ==== Total points:  20 ====
+
